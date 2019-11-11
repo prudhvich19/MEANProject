@@ -1,0 +1,86 @@
+<!-- main app container -->
+<div class="card m-3">
+        <h5 class="card-header">Test Creator</h5>
+        <div class="card-body">
+            <form >
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label>Test Name</label>
+                        <input type="text" readonly [(ngModel)]="test.test_name" name="test_name" class="form-control" />
+                    </div>
+                    <div class="form-group col-3" style="margin-left: 410px">
+                        <label>Date</label>
+                        <input type="text" readonly class="form-control" [(ngModel)]="test.created_on" name="created_on" />
+                    </div>
+                </div>
+                <div class="form-group col-4" >
+                    <label>Subject</label>
+                    <input type="text" readonly class="form-control" [(ngModel)]="test.subject.sub_name" name="subject" />
+                </div>
+                <hr>
+                <h4>Content - Q&A's :</h4> 
+    
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createQues">Add New Q&A 
+                        <i class="fas fa-plus"></i>
+                </button> 
+                
+                <div id="content" >  
+                    <div class="card m-3" *ngFor="let item of content; let i = index">
+                        <div class="card-header">
+                          <div class="row">
+                            {{i+1}}) 
+                            <textarea type="text" name=question value="{{item.question}}" cols="90" rows="3" ></textarea>
+                          <button  type="button" class="btn btn-danger btn-sm" (click)="removeQA(i)" style="height: 30px; margin-left: 20px;">
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                          </button> 
+                        </div>
+
+                          </div> 
+                          <div class="card-body">
+                              <textarea type="text" name=answer value="{{item.answer}}" cols="100" rows="3"></textarea>
+                          </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1" (click)="onUpdateTest()">Create Test</button>
+                    <button class="btn btn-secondary" type="reset" >Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+    <!--CREATE FORM-->
+<div class="modal fade" id="createQues">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Create a Q & A</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <fieldset>
+                      <div class="form-group">
+                        <label for="ques">Question</label>
+                        <textarea type="text" class="form-control" id="ques" [(ngModel)]="question" name="question" placeholder="Enter Question"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="ans">Answer</label>
+                        <textarea class="form-control" id="ans" rows="3" [(ngModel)]="answer" name="answer" placeholder="Enter Answer"></textarea>
+                      </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"  (click)="onAddQA()" value="submit">Create Q&A</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+</div>
+      

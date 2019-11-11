@@ -1,0 +1,57 @@
+<!-- main app container -->
+<div class="card m-3">
+    <h5 class="card-header">Test Creator</h5>
+    <div class="card-body">
+        <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label>Test Name</label>
+                    <input type="text" formControlName="testName" class="form-control" [ngClass]="{ 'is-invalid': submitted && tf.testName.errors }" />
+                    <div *ngIf="submitted && tf.testName.errors" class="invalid-feedback">
+                        <div *ngIf="tf.testName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-3" style="margin-left: 410px">
+                    <label>Date</label>
+                    <input type="date" formControlName="createdOn" class="form-control" [ngClass]="{ 'is-invalid': submitted && tf.createdOn.errors }" />
+                    <div *ngIf="submitted && tf.createdOn.errors" class="invalid-feedback">
+                        <div *ngIf="tf.createdOn.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-4" >
+                <label>Subject</label>
+                <input type="text" formControlName="subject" class="form-control" [ngClass]="{ 'is-invalid': submitted && tf.subject.errors }" />
+                <div *ngIf="submitted && tf.subject.errors" class="invalid-feedback">
+                    <div *ngIf="tf.subject.errors.required">subject is required</div>
+                </div>
+            </div>
+            
+            <hr>
+            <h4>Content - Q&A's :</h4> 
+
+            <button type="button" class="btn btn-success" (click)="addNewQA()">Add New Subject 
+                    <i class="fas fa-plus"></i>
+            </button> 
+
+            <form formArrayName="content">  
+                    <div class="card m-3">
+                        <div class="card-header form-group">
+                                <label>Question</label>
+                                <input type="text" formControlName="subject" class="form-control">
+                        </div>
+                        <div class="card-body form-group">
+                                    <label>Answer</label>
+                                    <input type="text" formControlName="answer" class="form-control">
+                        </div>            
+                    </div>
+            </form>
+            
+            
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Register</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

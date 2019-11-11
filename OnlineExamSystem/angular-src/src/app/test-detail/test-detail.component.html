@@ -1,0 +1,38 @@
+<div class="card m-3">
+    <h5 class="card-header">Test Creator</h5>
+    <div class="card-body">
+        <form >
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label>Test Name</label>
+                    <input type="text" readonly [(ngModel)]="test.test_name" name="test_name" class="form-control" />
+                </div>
+                <div class="form-group col-3" style="margin-left: 410px">
+                    <label>Date</label>
+                    <input type="text" readonly class="form-control" [(ngModel)]="test.created_on" name="created_on" />
+                </div>
+            </div>
+            <div class="form-group col-4" >
+                <label>Subject</label>
+                <input type="text" readonly class="form-control" [(ngModel)]="test.subject.sub_name" name="subject" />
+            </div>
+            <hr>
+            <h4>Content - Q&A's :</h4> 
+            
+            <div id="content" >  
+                    <div class="card m-3" *ngFor="let item of test.content; let i = index">
+                        <div class="card-header">
+                          <div class="row">
+                            {{i+1}}) 
+                            <textarea type="text" name=question value="{{item.question}}" cols="80" rows="2" readonly></textarea>
+                        </div>
+
+                          </div> 
+                          <div class="card-body">
+                              <textarea type="text" name=answer value="{{item.answer}}" cols="80" rows="2" readonly></textarea>
+                          </div>
+                    </div>
+            </div>
+        </form>
+    </div>
+</div>

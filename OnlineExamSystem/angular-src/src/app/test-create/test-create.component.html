@@ -1,0 +1,120 @@
+<!-- main app container -->
+<div class="card m-3">
+        <h5 class="card-header">Test Editor</h5>
+        <div class="card-body">
+            <form >
+                <div class="form-row">
+                    <div class="form-group col-4">
+                        <label>Test Name</label>
+                        <input type="text" [(ngModel)]="test.test_name" name="test_name" class="form-control" />
+                    </div>
+                    <div class="form-group col-3" style="margin-left: 410px">
+                        <label>Date</label>
+                        <input type="date"  class="form-control" [(ngModel)]="test.created_on" name="created_on" />
+                    </div>
+                </div>
+                <div class="form-group col-4" >
+                    <label>Subject</label>
+                    <!--<input type="text" class="form-control" [(ngModel)]="test.subject.sub_name" name="subject" />
+                -->
+                <select #subList [(ngModel)]="subject"  [ngModelOptions]="{standalone: true}" class="form-control" id="subList" (change)="setId(subject)" >
+                        <option *ngFor="let subject of subjects" [(ngValue)]="subject"  >{{subject.sub_name}}</option>
+                      </select>
+                    </div>
+                
+                <hr>
+                <h4>Content - Q&A's :</h4> 
+    
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createQues">Add New Q&A 
+                        <i class="fas fa-plus"></i>
+                </button> 
+                &nbsp; &nbsp;
+                <button class="col-6" type="button" class="btn btn-success" data-toggle="modal" data-target="#qaBank">Add from QA Bank
+                    <i class="fas fa-plus"></i>
+              </button> 
+              
+                <div id="content" >  
+                        <div class="card m-3" *ngFor="let item of content; let i = index">
+                            <div class="card-header form-group">
+                                   {{i+1}}). {{item.question}}
+                                   <button type="button" class="btn btn-danger" (click)="removeQA(i)">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button> 
+                            </div>
+                            <div class="card-body form-group"   >
+                                {{item.answer}}
+                            </div>            
+                        </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn btn-primary mr-1" (click)="onCreateTest()">Create Test</button>
+                    <button class="btn btn-secondary" type="reset" >Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+    <!--CREATE FORM-->
+<div class="modal fade" id="createQues">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Create a Q & A</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <fieldset>
+                      <div class="form-group">
+                        <label for="ques">Question</label>
+                        <textarea type="text" class="form-control" id="ques" [(ngModel)]="question" name="question" placeholder="Enter Question"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="ans">Answer</label>
+                        <textarea class="form-control" id="ans" rows="3" [(ngModel)]="answer" name="answer" placeholder="Enter Answer"></textarea>
+                      </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary"  (click)="onAddQA()" value="submit">Create Q&A</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+</div>
+      
+
+<div class="modal fade" id="qaBank">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+         Questions
+        </div>
+        <div class="modal-body">
+              <div class="list-group">
+                <a class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questionsBank; let i=index">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1" >{{i+1}}.) {{question.question}} </h5>
+                    <small> 
+                        <button type="button" class="btn btn-success btn-sm" (click)="add(question)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </small>
+                  </div>
+                  <p class="mb-1" >{{question.answer}}</p>
+                </a>
+              </div>
+       
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  (click)="onAddQA()" value="submit">Create Q&A</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

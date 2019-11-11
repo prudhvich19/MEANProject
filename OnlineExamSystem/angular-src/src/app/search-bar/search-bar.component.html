@@ -1,0 +1,13 @@
+<div id="search-component">
+
+    <div class="form-group">
+        <input #searchBar class="form-control" type="text" placeholder="Search" id="searchBar" (input)="search(searchBar.value)">
+    </div>
+    <ul class="search-result">
+        <li *ngFor="let subject of subject$ | async" >
+        <a>
+            {{subject.sub_name}}
+        </a>
+        </li>
+    </ul>
+</div>

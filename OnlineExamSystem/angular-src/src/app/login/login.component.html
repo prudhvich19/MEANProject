@@ -1,0 +1,31 @@
+<div class="m-5 offset-md-4 bg-light w-50" >
+    
+<div class="alert alert-dismissible alert-danger" *ngIf="errors">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Oh snap! </strong> <a href="#" class="alert-link"> {{errors}}</a> and try submitting again.
+</div>
+
+<div class="card m-4 w-75">
+    <h5 class="card-header text-center">Login Form</h5> 
+    <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid && onLoginSubmit()" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" [(ngModel)]="username" name="user_name" #user_name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && user_name.invalid }" required>
+                <div *ngIf="user_name.invalid" class="invalid-feedback">
+                        <div *ngIf="user_name.errors.required">First Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label> Password</label>
+                <input type="password" class="form-control" [(ngModel)]="password" name="pwd"  #pwd="ngModel" required [ngClass]="{ 'is-invalid': f.submitted && pwd.invalid }" required>
+                <div *ngIf="pwd.invalid" class="invalid-feedback">
+                    <div *ngIf="pwd.errors.required">Password is required</div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Login">
+            <a class="offset-md-3" name="" id="" [routerLink]="['/register']" >New user? Register Here.</a>
+        </form>
+    </div>
+</div>
+</div>

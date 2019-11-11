@@ -1,0 +1,120 @@
+<h2>Subjects: </h2>                              
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createSub">Add New Subject 
+    <i class="fas fa-plus"></i>
+</button> 
+
+<table class="table table-hover table-bordered" style="width:600px">
+        <thead>
+          <tr>
+            <th scope="col"> Code</th>
+            <th scope="col"> Name</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subject of subjects">
+            <th scope="row">{{subject.sub_code}}</th>
+            <td>{{subject.sub_name}}</td>
+            <td>
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editSub" (click)="editloadData(subject)">
+                <i class="far fa-edit" ></i>
+              </button>
+              <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteSub" (click)="deleteloadData(subject)">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </td>
+            <td hidden>{{subject._id}}</td>
+          </tr>
+        </tbody>
+</table> 
+
+
+
+<!------CREATE FORM-------->
+
+<div class="modal fade" id="createSub">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create a New Subject</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <fieldset>
+                  <div class="form-group">
+                    <label for="subName">Subject</label>
+                    <input type="text" class="form-control" id="subName" [(ngModel)]="sub_name" name="sub_name" placeholder="Enter Subject Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="subCode">Subject Code</label>
+                    <input type="text" class="form-control" id="subCode" [(ngModel)]="sub_code" name="sub_code" placeholder="Enter Subject code">
+                  </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  (click)="onCreateSubject()" value="submit">Create Subject</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<!------EDIT FORM-------->
+
+<div class="modal fade" id="editSub" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Subject</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <fieldset>
+                  <div class="form-group" >
+                    <label for="subName">Subject</label>
+                    <input type="text"  class="form-control" [(ngModel)]="esubject.sub_name" name="subName"  >
+                  </div>
+                  <div class="form-group">
+                    <label for="subCode">Subject Code</label>
+                    <input type="text"  class="form-control" [(ngModel)]="esubject.sub_code" name="subCode">
+                  </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" value="submit" (click)="onEditSubject()">Edit Subject</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!---CONFIRM FORM-->
+<div class="modal fade" id="deleteSub" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Are you sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" value="submit" data-dismiss="modal" (click)="onDeleteSubject()">Delete Subject</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

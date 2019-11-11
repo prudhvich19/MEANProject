@@ -1,0 +1,124 @@
+<h2>Question Bank: </h2>
+
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#createQues">Add New Q&A 
+    <i class="fas fa-plus"></i>
+</button> 
+
+<div id="accordion">
+
+  <div class="card" *ngFor="let question of questions">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#collapseOne">
+        {{question.question}}
+          <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editQues" (click)="editloadData(question)">
+            <i class="far fa-edit" ></i>
+          </button>
+          <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteQues" (click)="deleteloadData(question)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+      </a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        {{question.answer}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--CREATE FORM-->
+<div class="modal fade" id="createQues">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title">Create a Q & A</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <fieldset>
+                <div class="form-group">
+                  <label for="subList">Select Subject</label>
+                  <select #subList [(ngModel)]="subject"  [ngModelOptions]="{standalone: true}" class="form-control" id="subList" (change)="setId(subject)" >
+                    <option *ngFor="let subject of subjects" [(ngValue)]="subject"  >{{subject.sub_name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="ques">Question</label>
+                  <input type="text" class="form-control" id="ques" [(ngModel)]="question" name="question" placeholder="Enter Question">
+                </div>
+                <div class="form-group">
+                  <label for="ans">Answer</label>
+                  <textarea class="form-control" id="ans" rows="3" [(ngModel)]="answer" name="answer" placeholder="Enter Answer"></textarea>
+                </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"  (click)="onCreateQA()" value="submit">Create Q&A</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--EDIT FORM-->
+<div class="modal fade" id="editQues" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <fieldset>
+                <div class="form-group" >
+                  <label for="ques">Question</label>
+                  <input type="text"  class="form-control" [(ngModel)]="equestion.question" name="ques"  >
+                </div>
+                <!--<div class="form-group">
+                  <label for="ans">Answer</label>
+                  <input type="text"  class="form-control" [(ngModel)]="equestion.answer" name="ans">
+                </div>-->
+                <div class="form-group">
+                  <label for="ans">Answer</label>
+                  <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="equestion.answer" name="ans"></textarea>
+                </div>
+          </fieldset>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" value="submit" (click)="onEditQA()">Edit Q&A</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--CONFIRM FORM-->
+<div class="modal fade" id="deleteQues" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Question</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Are you sure you want to delete?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" value="submit" (click)="onDeleteQA()">Delete Question</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

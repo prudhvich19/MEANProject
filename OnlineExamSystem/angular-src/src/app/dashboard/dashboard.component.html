@@ -1,0 +1,17 @@
+<div>
+    
+</div>
+
+
+<h3>Quick  View:</h3>
+<div class="row" >
+    
+    <div class="card" *ngFor="let test of tests">
+        <div class="card-body">
+          <h4 class="card-title">{{test.test_name}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted">{{test.created_on}}</h6>
+          <p class="card-text">No. of Q&A's:  {{test.content.length}}</p>
+          <button type="button" class="btn btn-primary" (click)="goToDetails(test)">View</button>
+        </div>
+    </div>
+</div>
